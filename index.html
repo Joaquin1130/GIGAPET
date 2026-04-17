@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GigaPet</title>
+
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+        }
+
+        img {
+            width: 250px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- UPDATED NAME -->
+    <h1 id="petName">Mango</h1>
+
+    <!-- ✅ YOUR IMAGE HERE -->
+    <img id="petImage" src="mango.png">
+
+    <p>Weight: <span id="weight">50</span></p>
+    <p>Happiness: <span id="happiness">50</span></p>
+
+    <button id="feedBtn">Feed</button>
+    <button id="playBtn">Play</button>
+    <button id="exerciseBtn">Exercise</button>
+    <button id="sleepBtn">Sleep</button>
+
+    <div id="message"></div>
+
+    <script>
+        $(document).ready(function() {
+
+            let pet_info = {
+                name: "Mango", // UPDATED
+                weight: 50,
+                happiness: 50
+            };
+
+            function updateStats() {
+                $("#weight").text(pet_info.weight);
+                $("#happiness").text(pet_info.happiness);
+            }
+
+            function checkLimits() {
+                if (pet_info.weight < 0) pet_info.weight = 0;
+                if (pet_info.happiness < 0) pet_info.happiness = 0;
+            }
+
+            $("#feedBtn").click(function() {
+                pet_info.weight += 5;
+                pet_info.happiness += 3;
+
+                $("#message").hide().text("Yum! I am happy!").fadeIn();
+
+                checkLimits();
+                updateStats();
+            });
+
+            $("#playBtn").click(function() {
+                pet_info.weight -= 3;
+                pet_info.happiness += 5;
+
+                $("#message").hide().text("That was fun!").fadeIn();
+
+                checkLimits();
+                updateStats();
+            });
+
+            $("#exerciseBtn").click(function() {
+                pet_info.weight -= 5;
+                pet_info.happiness -= 2;
+
+                $("#message").hide().text("I am tired...").fadeIn();
+
+                checkLimits();
+                updateStats();
+            });
+
+            $("#sleepBtn").click(function() {
+                pet_info.happiness += 2;
+
+                $("#message").hide().text("I feel rested!").fadeIn();
+
+                checkLimits();
+                updateStats();
+            });
+
+            // required extra method
+            $("#message").append("<p>Welcome to Mango!</p>");
+
+        });
+    </script>
+
+</body>
+</html>
